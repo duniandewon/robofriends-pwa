@@ -26,7 +26,6 @@
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
-      "@redux*": ["src/redux/*"],
     }
   },
   "include": ["src", "robots.ts"],
