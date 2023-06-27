@@ -1,17 +1,33 @@
-import { IRobot } from "robots";
+import { useCallback, useEffect } from "react";
 
 import RobotItem from "./RobotItem";
 
-interface Props {
-  robots: IRobot[];
-}
+import { useAppDispatch, useAppSelector } from "@/hooks/useDispatch";
+import {
+  fetchRobots,
+  selectFilteredRobots,
+  selectRobots,
+} from "@/redux/robotsSlice";
 
-function RobotsList({ robots }: Props) {
+function RobotsList() {
+  const dispatch = useAppDispatch();
+
+  const robots = useAppSelector(selectRobots);
+  const filteredRobots = useAppSelector(selectFilteredRobots);
+
+  const renderRobots = useCallback(() => {
+    const data = filteredRobots.length ? filteredRobots : robots;
+
+    return data.map((robot) => <RobotItem robot={robot} key={robot.id} />);
+  }, [filteredRobots, robots]);
+
+  useEffect(() => {
+    dispatch(fetchRobots());
+  }, [dispatch]);
+
   return (
     <ul className="flex flex-wrap gap-4 px-3 justify-center">
-      {robots.map((robot) => (
-        <RobotItem robot={robot} key={robot.id} />
-      ))}
+      {renderRobots()}
     </ul>
   );
 }

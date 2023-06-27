@@ -1,19 +1,21 @@
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 
-interface Props {
-  onChange: (text: string) => void;
-}
+import { filterRobots } from "@/redux/robotsSlice";
 
-function SearchBox({ onChange }: Props) {
+import { useAppDispatch } from "@/hooks/useDispatch";
+
+function SearchBox() {
   const [search, setSearch] = useState("");
   const ref = useRef<HTMLInputElement>(null);
+
+  const dispatch = useAppDispatch();
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       setSearch(e.target.value);
-      onChange(e.target.value);
+      dispatch(filterRobots(e.target.value));
     },
-    [onChange]
+    [dispatch]
   );
 
   useEffect(() => {
