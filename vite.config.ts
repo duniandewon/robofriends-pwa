@@ -7,31 +7,39 @@ import path from "path";
 const manifestForPlugin: Partial<VitePWAOptions> = {
   registerType: "prompt",
   includeAssets: [],
+  workbox: {
+    globPatterns: ["**/*"],
+  },
   manifest: {
-    short_name: "robofriends",
+    theme_color: "#827f7f",
+    background_color: "#b0abab",
+    display: "standalone",
+    scope: "/",
+    start_url: "/",
     name: "Robofriends",
+    short_name: "robofriends",
     icons: [
       {
-        src: "favicon.ico",
-        sizes: "64x64 32x32 24x24 16x16",
-        type: "image/x-icon",
-      },
-      {
-        src: "logo192.png",
-        type: "image/png",
+        src: "/icon-192x192.png",
         sizes: "192x192",
+        type: "image/png",
       },
       {
-        src: "logo512.png",
+        src: "/icon-256x256.png",
+        sizes: "256x256",
         type: "image/png",
+      },
+      {
+        src: "/icon-384x384.png",
+        sizes: "384x384",
+        type: "image/png",
+      },
+      {
+        src: "/icon-512x512.png",
         sizes: "512x512",
+        type: "image/png",
       },
     ],
-    orientation: "portrait",
-    start_url: "/",
-    display: "standalone",
-    theme_color: "#000000",
-    background_color: "#ffffff",
   },
 };
 
